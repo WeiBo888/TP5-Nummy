@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nummy</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/css/swiper.min.css">
+    <link rel="stylesheet" href="/static/front/css/common.css">
+</head>
+<body>
+<!--固定头部-->
+<div class="header">
+    <!--顶部导航栏-->
+    <div class="navigation">
+        <!--导航栏左侧-->
+        <!--未登录的状态-->
+        {if !$username}
+        <ul class="left-navigation">
+            <li>Hi，欢迎百度糯米</li>
+            <li class="login"><a href="{:url('login/index')}">请登录</a></li>
+            <li class="register"><a href="{:url('regist/index')}">免费注册</a></li>
+        </ul>
+        <!--已登录的状态-->
+        {else /}
+        <ul class="left-navigation">
+            <li>Hi, {$username}</li>
+            <li class="register"><a href="{:url('login/logout')}">退出</a></li>
+        </ul>
+        {/if}
+        <!--导航栏右侧-->
+        <ul class="right-navigation">
+            <li><a href="">食品安全</a></li>
+            <li><a href="">帮助中心</a></li>
+            <li class="sep-line">丨</li>
+            <li><a href="">我是商家
+                <span><img src="/static/front/images/re-arrow-down_f7b3b5b.png" class="arrow-down-logo"/></span>
+            </a>
+                <span class="option-arrow-down"></span>
+                <span class="hide-massage r1"><a href="#">商户中心</a><a href="#">我想合作</a></span>
+            </li>
+            <li><a href="">糯米APP
+                <span><img src="/static/front/images/re-arrow-down_f7b3b5b.png" class="arrow-down-logo"/></span>
+            </a>
+                <span class="option-arrow-down"></span>
+                <span class="hide-massage r2"><a href="#">二维码</a></span>
+            </li>
+            <li class="sep-line">丨</li>
+            <li>
+                <a href="">最近浏览
+                    <span><img src="/static/front/images/re-arrow-down_f7b3b5b.png" class="arrow-down-logo"/></span>
+                </a>
+                <span class="option-arrow-down"></span>
+                <span class="hide-massage r3">
+                  <a href="#" class="item-first"><img
+                          src="http://gss0.baidu.com/-4o3dSag_xI4khGko9WTAnF6hhy/bainuo/crop%3D0%2C1%2C470%2C284%3Bw%3D230%3Bq%3D79/sign=c0b8a0c5983df8dcb272d5d1f0215eba/d62a6059252dd42a9843af99043b5bb5c9eab8be.jpg">
+                        <div class="title-area">
+                            <div class="title">同乐迪(望京西路店)</div>
+                            <div class="score"></div>
+                            <div class="price-area">
+                                <span class="price">暂无价格</span>
+                                <span class="position">望京</span>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#" class="item-first"><img
+                            src="http://gss0.baidu.com/-4o3dSag_xI4khGko9WTAnF6hhy/bainuo/crop%3D0%2C1%2C470%2C284%3Bw%3D230%3Bq%3D79/sign=c0b8a0c5983df8dcb272d5d1f0215eba/d62a6059252dd42a9843af99043b5bb5c9eab8be.jpg">
+                        <div class="title-area">
+                            <div class="title">同乐迪(望京西路店)</div>
+                            <div class="score"></div>
+                            <div class="price-area">
+                                <span class="price">暂无价格</span>
+                                <span class="position">望京</span>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="visited-clear">
+                        <a href="#">清空浏览记录</a>
+                    </div>
+                </span>
+            </li>
+            <li><a href="">个人中心</a></li>
+        </ul>
+    </div>
+    <!--中间导航栏-->
+    <div class="top-area">
+        <div class="search">
+            <!--logo-->
+            <a href=""><img src="/static/front/images/re-logo_7c90a10.png" class="nuomi-logo"/></a>
+
+            <!--城市选择-->
+            <div class="city-wrap">
+                <span><img src="/static/front/images/re-pos_50b4a85.png" class="city-pos"/></span>
+                <span>{$defaultCity.name}</span>
+                <span><img src="/static/front/images/line-arrow_698e86e.png" class="arrow-down-line"/></span>
+                <span class="option-arrow-down"></span>
+                <div class="hide-massage r4">
+                    <div>
+                        <h3>热门城市</h3>
+                        <ul>
+                            {volist name='cities' id='c'}
+                            <li>
+                                <a href="#">{$c.name}</a>
+                            </li>
+                            {/volist}
+                        </ul>
+                        <a class="more-city">更多城市 ></a>
+                    </div>
+                </div>
+            </div>
+
+            <!--搜索-->
+            <form class="search-form" action="#" method="get">
+                <input type="text" class="search-area" placeholder="搜索商家/地点"><input type="submit" class="search-btn"
+                                                                                    value="搜 索">
+            </form>
+
+            <!--热门搜索-->
+            <div class="random">
+                <ul class="hot-search">
+                    <li><a href="#">按摩</a></li>
+                    <li><a href="#">按摩</a></li>
+                    <li><a href="#">按摩</a></li>
+
+                </ul>
+            </div>
+
+            <!--退赔付-->
+            <div class="option">
+                <a href="#">
+                    <div class="retreat">
+                        <img src="/static/front/images/tui_93de3ec.png"/>
+                        <span class="option-arrow-down"></span>
+                        <span class="hide-massage r5">未消费,随便退!</span>
+                    </div>
+                    <div class="compensate">
+                        <img src="/static/front/images/pei_6ab04b5.png"/>
+                        <span class="option-arrow-down"></span>
+                        <span class="hide-massage r6">消费不满意先行赔付!</span>
+                    </div>
+                    <div class="rmb">
+                        <img src="/static/front/images/money_44a4950.png"/>
+                        <span class="option-arrow-down"></span>
+                        <span class="hide-massage r7">过期自动退!</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!--底部导航栏-->
+    <div class="nav-bar-index">
+
+        <!--全部分类栏-->
+        <div class="item">
+            <span class="all">全部分类</span>
+            <img src="/static/front/images/item-img_c440d75.png" class="item-image"/>
+        </div>
+
+        <!--横向分类排列-->
+        <ul class="nav-list">
+            <li class="nav-li"><a href="#" class="nav-a">首页</a></li>
+            <li class="nav-li"><a href="#" class="nav-a">酒店</a></li>
+            <li class="nav-li">
+                <a href="#" class="nav-a">出行
+                    <span><img src="/static/front/images/new-arrow-down_d9805e9.png"
+                               class="new-arrow-down-logo"/></span>
+                    <span class="option-arrow-down"></span></a>
+                <div class="hide-massage r8">
+                    <ul>
+                        <li><a href="#">机票</a></li>
+                        <li><a href="#">火车票</a></li>
+                        <li><a href="#">汽车票</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-li"><a href="#" class="nav-a">电影</a>
+                <img src="/static/front/images/icon-hot_beb2af6.png" class="icon-hot"/>
+            </li>
+            <li class="nav-li"><a href="#" class="nav-a">结婚</a></li>
+            <li class="nav-li"><a href="#" class="nav-a">外卖</a></li>
+        </ul>
+    </div>
+
+    <!--纵向分类排列-->
+    <ul class="menu-list">
+
+        {volist name='manuData' id='first_level'}
+        <li>
+            <!--一级目录-->
+            <a href="#" class="menu-title">{$first_level.title}</a>
+            <a href="#" class="menu-content">aaa</a>
+            <div class="category-list" style="height: 400px!important; width: 730px!important;background-color: white;">
+            {volist name='seManuData' id='second_level'}
+            {if $second_level.parent_id == $first_level.id}
+
+                <!--二级目录-->
+                <div class="se_category">
+                    <h3>{$second_level.title}</h3>
+
+                    <!--三级目录-->
+                    {if $first_level.title == '电影'}
+                    <ul class="th_category_film">
+                        {volist name='thManuData' id='third_level'}
+                        <!--{if $second_level.id == $third_level.parent_id}-->
+                        <li style="background-color: white">
+                            <a href="#">{$third_level.title}</a>
+                        </li>
+                        <!--{/if}-->
+                        {/volist}
+                    </ul>
+                    {else /}
+                    <ul class="th_category">
+                        {volist name='thManuData' id='third_level'}
+                        <!--{if $second_level.id == $third_level.parent_id}-->
+                        <li style="background-color: white">
+                            <a href="#">{$third_level.title}</a>
+                        </li>
+                        <!--{/if}-->
+                        {/volist}
+                    </ul>
+                    {/if}
+
+                </div>
+                {/if}
+                {/volist}
+            </div>
+        </li>
+        {/volist}
+    </ul>
+
+
+</div>

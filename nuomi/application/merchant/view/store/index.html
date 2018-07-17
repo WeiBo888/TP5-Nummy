@@ -1,0 +1,58 @@
+{include file='public/header'}
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 商铺管理 <span class="c-gray en">&gt;</span> 商铺列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container">
+    <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a class="btn btn-primary radius" onclick="store_regist('商铺注册','{:url('store/regist')}')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 注册商铺</a></span> <span class="r">共有数据：<strong>54</strong> 条</span> </div>    <div class="mt-20">
+        <table class="table table-border table-bordered table-hover table-bg table-sort">
+            <thead>
+            <tr class="text-c">
+                <th width="25"><input type="checkbox" name="" value=""></th>
+                <th width="30">ID</th>
+                <th width="100">商家图片</th>
+                <th width="70">店名</th>
+                <th width="80">电话</th>
+                <th width="50">地址</th>
+                <th width="50">分类</th>
+                <th width="70">地理位置</th>
+                <th width="50">人均</th>
+                <th width="100">推荐</th>
+                <th width="100">执照</th>
+                <th width="100">店铺介绍</th>
+                <th width="100">添加时间</th>
+                <th width="30">状态</th>
+                <th width="80">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {volist name='data' id='store'}
+            <tr class="text-c">
+                <td><input type="checkbox" value="1" name=""></td>
+                <td>{$store.id}</td>
+                <td><img src="{$store.store_img}" class="store_img" alt="此处应该有掌声" style="width: 90px; height: 90px"></td>
+                <td><u style="cursor:pointer" class="text-primary">{$store.name}</u></td>
+                <td>{$store.phone}</td>
+                <td>{$store.address}</td>
+                <td>{:getCategoryNameByID($store.category_id)}</td>
+                <td>经度: {$store.longitude}<br>纬度: {$store.latitude}</td>
+                <td>{$store.avg_price}¥</td>
+                <td>{$store.recommend}</td>
+                <td><img src="{$store.permits_img}" alt="此处应该有掌声" style="width: 90px; height: 90px" ></td>
+                <td>{:html_entity_decode($store.content)}</td>
+                <td>{$store.create_time|date='Y-m-d H:i:s'}</td>
+                <td class="td-status">{:status($store.status)}</td>
+                <td class="td-manage">
+                    <!--public里面的js-->
+                    <a style="text-decoration:none" onClick="content_handle('确认要禁用么我么😢','{:url('store/status',['id'=>$store.id, 'status'=> -1])}','残忍禁用😈','于心不忍😁')" href="javascript:;" title="停用">
+                        <i class="Hui-iconfont">&#xe631;</i>
+                    </a>
+                    <a style="text-decoration:none" onclick="store_edit('修改商品','{:url('store/edit',['id'=>$store.id])}')" href="javascript:;">
+                        <i class="Hui-iconfont">&#xe6df;</i>
+                    </a>
+                </td>
+            </tr>
+            {/volist}
+            </tbody>
+        </table>
+    </div>
+</div>
+{include file='public/footer'}

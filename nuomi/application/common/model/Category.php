@@ -1,0 +1,41 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: weibo
+ * Date: 2018/6/29
+ * Time: 下午5:35
+ */
+namespace app\common\model;
+
+use think\Model;
+
+class Category extends Model{
+    //获取所有菜单信息(前端)
+    public function getAllCategories()
+    {
+        $con = [
+            'status' => 1
+        ];
+        return $this->where($con)->select();
+    }
+
+//后端
+
+    //获取所有一/二/三级分类(根据上一级级id)
+    public function getChildLevelByParentID($parent_id = 0)
+    {
+        $con = [
+            'parent_id' => $parent_id,
+        ];
+        return $this->where($con)->select();
+    }
+
+    public function getCategoryByID($id)
+    {
+        $con = [
+            'id' => $id
+        ];
+//        dump($id);
+        return $this->where($con)->value('name');
+    }
+}

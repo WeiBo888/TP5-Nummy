@@ -1,0 +1,262 @@
+<!--_meta 作为公共模版分离出去-->
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="/static/back/hui/lib/html5shiv.js"></script>
+    <script type="text/javascript" src="/static/back/hui/lib/respond.min.js"></script>
+    <![endif]-->
+    <link href="/static/back/hui/static/h-ui/css/H-ui.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/back/hui/static/h-ui.admin/css/H-ui.login.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/back/hui/static/h-ui.admin/css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/back/hui/lib/Hui-iconfont/1.0.8/iconfont.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/back/css/common.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="/static/back/hui/lib/webuploader/0.1.5/webuploader.css">
+    <link rel="stylesheet" type="text/css" href="/static/back/hui/lib/laydate/theme/default/laydate.css">
+    <!--[if IE 6]>
+    <script type="text/javascript" src="/static/back/hui/lib/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <title>后台登录 - H-ui.admin v3.1</title>
+    <meta name="keywords" content="H-ui.admin v3.1,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
+    <meta name="description" content="H-ui.admin v3.1，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
+</head>
+<body>
+<article class="page-container" style="width: 80%;margin-left: 20px">
+    <form method="post" class="form form-horizontal" id="form-member-add" action="{:url('store/save')}">
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>店铺名称：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" placeholder="请输入商铺名称" id="name" name="name">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>店铺图片：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <!--<div id="uploader-demo">-->
+                    <!--用来存放item-->
+                    <!--<div id="fileList" class="uploader-list"></div>-->
+                <div class="uploader-list"><img src="" id="store_img_view" style="width: 200px;"></div>
+                <div class="filePicker" onclick="addImage('store_img')">选择图片</div>
+                    <input type="hidden" name="store_img" id="store_img">
+                <!--</div>-->
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>营业执照：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <!--<div id="uploader-demo">-->
+                    <!--用来存放item-->
+                    <!--<div id="fileList" class="uploader-list"></div>-->
+                <div class="uploader-list"><img src="" id="permits_img_view" style="width: 200px;"></div>
+                <div class="filePicker" onclick="addImage('permits_img')">选择图片</div>
+                <input type="hidden" name="permits_img" id="permits_img">
+                <!--</div>-->
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>电话：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" placeholder="请输入联系人电话" id="phone" name="phone">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>分类：</label>
+            <div class="formControls col-xs-8 col-sm-9"> <span class="select-box" style="width: 363px">
+				<select class="select category_select" size="1" name="category_id[]" id="first_category">
+					<option value="-1" selected>请选择分类</option>
+                    {volist name='categories' id='category'}
+					<option class="category" value="{$category.id}">{$category.name}</option>
+					{/volist}
+				</select>
+                <select class="select category_select" size="1" name="category_id[]" id="second_category">
+                    <option value="-1" selected>请选择分类</option>
+
+                </select>
+                <select class="select category_select" size="1" name="category_id[]" id="third_category">
+                    <option value="-1" selected>请选择分类</option>
+
+                </select>
+            </span>
+                <!--</span>-->
+                <!--<span class="select-box" style="width: 110px">-->
+                <!---->
+                <!--</span>-->
+                <!--<span class="select-box" style="width: 110px">-->
+                <!---->
+                <!--</span>-->
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>人均(¥)：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" placeholder="请输入人均消费" id="avg_price" name="avg_price">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">推荐：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" placeholder="请输入您所推荐的内容" id="recommend" name="recommend">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>地址：</label>
+            <div class="formControls col-xs-8 col-sm-9"> <span class="select-box" style="width: 150px">
+				<select class="select region_select" size="1" name="province" id="province">
+					<option value="-1" selected>请选择省份</option>
+                    {volist name='provinces' id='province'}
+					<option class="province" value="{$province.id}">{$province.name}</option>
+					{/volist}
+				</select>
+                </span>
+                <span class="select-box" style="width: 150px">
+                <select class="select region_select" size="1" name="city" id="city">
+                    <option id="please" selected>请选择城市</option>
+				</select>
+                </span>
+                <input name="street" placeholder="请输入详细地址" style="width: 360px;">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>营业时间：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <!-- 加载时间 -->
+                <input type="text" class="input-text" name="open_time" id="open_time">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>店铺介绍：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <!-- 加载编辑器的容器 -->
+                <script id="container" name="content" type="text/plain"></script>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+            </div>
+        </div>
+    </form>
+</article>
+
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="/static/back/hui/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="/static/back/hui/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="/static/back/hui/static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="/static/back/hui/static/h-ui.admin/js/H-ui.admin.js"></script>
+<!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/static/back/hui/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="/static/back/hui/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="/static/back/hui/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="/static/back/hui/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript" src="/static/back/hui/lib/webuploader/0.1.5/webuploader.js"></script>
+<script type="text/javascript" src="/static/back/js/imageUpload.js"></script>
+<!--时间插件-->
+<script type="text/javascript" src="/static/back/hui/lib/laydate/laydate.js"></script>
+<!-- 配置文件 -->
+<script type="text/javascript" src="/static/back/hui/lib/ueditor/1.4.3/ueditor.config.js"></script>
+<!-- 编辑器源码文件 -->
+<script type="text/javascript" src="/static/back/hui/lib/ueditor/1.4.3/ueditor.all.js"></script>
+<!-- 实例化编辑器 -->
+<script type="text/javascript">
+    var ue = UE.getEditor('container');
+</script>
+<script type="text/javascript" src="/static/back/js/common.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $('.skin-minimal input').iCheck({
+            checkboxClass: 'icheckbox-blue',
+            radioClass: 'iradio-blue',
+            increaseArea: '20%'
+        });
+
+        $(form).validate({
+            rules: {
+                name: {
+                    required: true,
+                    stringCheck: true
+                },
+                phone: {
+                    required: true,
+                    minlength: 8
+                },
+//                email: {
+//                    required: true,
+//                    email: true
+//                },
+//                avg_price: {
+//                    required : true
+//                },
+//                uploadfile: {
+//                    required: true
+//                }
+
+            },
+            onkeyup: false,
+            focusCleanup: true,
+            success: "valid",
+            submitHandler: function (form) {
+//                $(form).ajaxSubmit();
+//                var index = parent.layer.getFrameIndex(window.name);
+                //parent.$('.btn-refresh').click();
+//                parent.layer.close(index);
+                $(form).submit();
+            }
+        });
+    });
+    $('#province').change(function () {
+        var url = "{:url('store/citySelect')}";
+        var id = $(this).val();
+        var data = {
+            id: id
+        };
+        $.post(url, data, function (res) {
+            var cityHtml = "<option>请选择城市</option>";
+            $(res).each(function () {
+                cityHtml += "<option value=" + this.id + ">" + this.name + "</option>";
+            });
+            $('#city').html(cityHtml);
+        }, "JSON");
+    });
+
+    $('.category_select').change(function () {
+        var url = "{:url('store/categorySelect')}";
+        var id = $(this).val();
+        var next = $(this).next();
+        var data = {
+            id: id
+        };
+        next.next().html('');
+        $.post(url, data, function (res) {
+            var categoryHtml = '';
+            categoryHtml = "<option>请选择分类</option>";
+            $(res).each(function () {
+                categoryHtml += "<option value=" + this.id + ">" + this.name + "</option>";
+                console.log(categoryHtml);
+            });
+            next.html(categoryHtml);
+        }, "JSON");
+    });
+
+
+    //layer时间
+    laydate.render({
+        elem : '#open_time',
+        type : 'time',
+        range : true
+    });
+
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

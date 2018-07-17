@@ -1,0 +1,49 @@
+{include file='public/header'}
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 用户中心 <span class="c-gray en">&gt;</span> 用户管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container">
+    <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="r">共有数据：<strong>1</strong> 条</span> </div>
+    <div class="mt-20">
+        <table class="table table-border table-bordered table-hover table-bg table-sort">
+            <thead>
+            <tr class="text-c">
+                <th width="25"><input type="checkbox" name="" value=""></th>
+                <th width="80">ID</th>
+                <th width="100">分类名称</th>
+                <th width="130">创建时间</th>
+                <th width="130">更新时间</th>
+                <th width="90">状态</th>
+                <th width="100">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {volist name='data' id='c'}
+            <tr class="text-c">
+                <td><input type="checkbox" value="1" name=""></td>
+                <td>{$c.id}</td>
+                <td><a href="{:url('category/subcategory',['id'=>$c.id])}">{$c.name}</a></td>
+                <td>{$c.create_time}</td>
+                <td>{$c.update_time}</td>
+                <td class="td-status">{:status($c.status)}</td>
+                <td class="td-manage">
+                    {if $c.status == 1}
+                    <!--public里面的js-->
+                    <a style="text-decoration:none" onClick="content_handle('确认要禁用么我么😢','{:url('category/status',['id'=>$c.id, 'status'=> -1])}','残忍禁用😈','于心不忍')" href="javascript:;" title="停用">
+                        <i class="Hui-iconfont">&#xe631;</i>
+                    </a>
+                    <a title="删除" href="javascript:;" onclick="content_handle('确认要删除我☹️','{:url('category/status',['id'=>$c.id, 'status'=>0])}','残忍删除😈','于心不忍')" class="ml-5" style="text-decoration:none">
+                        <i class="Hui-iconfont">&#xe609;</i>
+                    </a>
+                    {else /}
+                    <a title="启用" href="javascript:;" onclick="content_handle('确认要启用么我么😁','{:url('category/status',['id'=>$c.id, 'status'=>1])}','我愿意😇','我点错了')" class="ml-5" style="text-decoration:none">
+                        <i class="Hui-iconfont">&#xe600;</i>
+                    </a>
+                    {/if}
+                </td>
+            </tr>
+            {/volist}
+            </tbody>
+        </table>
+    </div>
+</div>
+{include file='public/footer'}

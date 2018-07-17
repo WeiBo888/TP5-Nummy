@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/front/css/login.css">
+    <script src="/static/front/js/jquery-3.3.1.js"></script>
+</head>
+<body>
+<div class="header">
+    <div class="login-header">
+        <div class="clearfix">
+            <div class="logo">
+                <a href="#"><img src="/static/front/images/re-logo_7c90a10.png"/></a>
+            </div>
+            <div class="login-text">登录</div>
+            <div class="reg-area">
+                还没有百度糯米账号
+                <a href="{:url('regist/index')}" class="reg-btn">注册</a>
+            </div>
+        </div>
+    </div>
+    <div class="login-middle">
+        <div class="clearfix">
+            <div class="login-bkg"></div>
+            <div class="login-area" id="login-area">
+                <div class="login-name">登录百度糯米</div>
+                <span class="tel-error" style="display: none"></span>
+                <form class="pass-form">
+                    <a href="#" class="pass-sms-btn" onclick="change(1)">短信快捷登录</a>
+                    <input type="text" name="username" placeholder="手机/邮箱/用户名/糯米账号" class="username">
+                    <label class="user-logo"></label>
+                    <span class="clear">x</span><br>
+                    <input type="password" name="password" placeholder="密码" class="password">
+                    <label class="psw-logo"></label>
+
+                    <div class="check">
+                        <input type="checkbox" name="pass-checkbox" checked>
+                        <label>下次自动登录</label>
+                    </div>
+                    <a href="#" class="question">登录遇到问题</a>
+                    <div style="clear: both"></div>
+                    <input id="tel-submit" type="button" onclick="" class="submit-btn" value="登录">
+                </form>
+                <ul class="login-method">
+                    <li>
+                        <a href="#" class="qq">
+
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="xinlang">
+
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="login-area-msg" id="login-area-msg">
+                <div class="login-name">登录百度糯米</div>
+                <form class="pass-form-msg">
+                    <span class="tel-error">请填写手机号</span>
+                    <input type="text" name="tel" class="tel" placeholder="手机号">
+                    <lable class="tel-logo"></lable>
+                    <div class="code-input">
+                        <input class="code" name="code" placeholder="动态密码">
+                        <input type="button" onclick="" class="send-code" value="发送动态密码">
+                    </div>
+                    <input id="msg-submit" type="button" onclick="" class="submit-btn" value="登录">
+                </form>
+                <div class="agreement">
+                    <span>同意并接受</span>
+                    <a href="#" class="baidu-agreement">《百度用户协议》</a>
+                    <a href="#" class="login-id-psw" onclick="change(2)">账号密码登录</a>
+                </div>
+                <ul class="login-method">
+                    <li>
+                        <a href="#" class="qq">
+
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="xinlang">
+
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="login-bottom">
+        <div class="clearfix">
+            <div class="links">
+                <a href="#">关于百度糯米</a>
+                <span>丨</span>
+                <a href="#">常见问题</a>
+                <span>丨</span>
+                <a href="#">违规投诉</a>
+                <span>丨</span>
+                <a href="#">开放平台</a>
+                <span>丨</span>
+                <a href="#">用户协议</a>
+                <span>丨</span>
+                客服电话: <p>&nbsp;400-9216-6666&nbsp;</p>(每天9:00 - 22:00)
+            </div>
+        </div>
+        <div class="site-info">
+            <span>©</span>
+            2015&nbsp;nuomi.com&nbsp;
+            <a href="#" class="link">京ICP证030173号</a>
+            &nbsp;京公网安备11010802014106号
+        </div>
+    </div>
+</div>
+<script>
+    function change(num) {
+        if (num == 1){
+            $("#login-area").hide();
+            $("#login-area-msg").show();
+        }else {
+            $("#login-area-msg").hide();
+            $("#login-area").show();
+        }
+    }
+
+    $('#tel-submit').click(function () {
+        //获取用户名和密码
+        var username = $('input[name=username]').val();
+        var password = $('input[name=password]').val();
+        if ($('.username').val() == ""){
+            $('.tel-error').html('请输入手机/邮箱/用户名/糯米账号').show();
+            return;
+        }
+        if ($('.password').val() == ""){
+            $('.tel-error').html('请输入密码').show();
+            return;
+        }
+        var data = {
+            username : username,
+            password : password
+        };
+        var url = "{:url('login/login')}";
+        $.post(url, data, function (res) {
+            if (res.code == 0) {
+                $('.tel-error').html(res.msg).show();
+            }else {
+                if (res.status == 0) {
+                    $('.tel-error').html(res.message).show();
+                } else {
+                window.location.href = "{:url('index/index')}";
+                }
+            }
+        },'JSON')
+    })
+
+</script>
+</body>
+</html>

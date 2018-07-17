@@ -1,0 +1,63 @@
+{include file='public/header'}
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 商品管理 <span class="c-gray en">&gt;</span> 商品列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container">
+    <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a class="btn btn-primary radius" onclick="goods_add('商铺注册','{:url('goods/add')}')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加商品</a></span> <span class="r">共有数据：<strong>54</strong> 条</span> </div>    <div class="mt-20">
+    <table class="table table-border table-bordered table-hover table-bg table-sort">
+        <thead>
+        <tr class="text-c">
+            <th width="25"><input type="checkbox" name="" value=""></th>
+            <th width="40">ID</th>
+            <th width="40">商家id</th>
+            <th width="100">商品名称</th>
+            <th width="100">商品图片</th>
+            <th width="40">原价</th>
+            <th width="40">现价</th>
+            <th width="70">开始时间</th>
+            <th width="70">结束时间</th>
+            <th width="50">库存</th>
+            <th width="50">添加时间</th>
+            <th width="30">状态</th>
+            <th width="80">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        {volist name='data' id='goods'}
+        <tr class="text-c">
+            <td><input type="checkbox" value="1" name=""></td>
+            <td>{$goods.id}</td>
+            <td>{$goods.store_id}</td>
+            <td><u style="cursor:pointer" class="text-primary">{$goods.name}</u></td>
+            <td><img src="{$goods.image_url}" class="image_url" alt="此处应该有掌声" style="width: 90px;height: 90px;"></td>
+            <td>{$goods.old_price}¥</td>
+            <td>{$goods.new_price}¥</td>
+            <td>{$goods.start_time}</td>
+            <td>{$goods.end_time}</td>
+            <td>{$goods.count}</td>
+            <td>{$goods.create_time|date='Y-m-d H:i:s'}</td>
+            <td class="td-status">{:status($goods.status)}</td>
+            <td class="td-manage">
+                {if $goods.status == 1}
+                <!--public里面的js-->
+                <a style="text-decoration:none" onClick="content_handle('确认要禁用么我么😢','{:url('goods/status',['id'=>$goods.id, 'status'=> -1])}','残忍禁用😈','于心不忍')" href="javascript:;" title="停用">
+                    <i class="Hui-iconfont">&#xe631;</i>
+                </a>
+                <a title="删除" href="javascript:;" onclick="content_handle('确认要删除我☹️','{:url('goods/status',['id'=>$goods.id, 'status'=>0])}','残忍删除😈','于心不忍')" class="ml-5" style="text-decoration:none">
+                    <i class="Hui-iconfont">&#xe609;</i>
+                </a>
+                {else /}
+                <a title="启用" href="javascript:;" onclick="content_handle('确认要启用么我么😁','{:url('goods/status',['id'=>$goods.id, 'status'=>1])}','我愿意😇','我点错了')" class="ml-5" style="text-decoration:none">
+                    <i class="Hui-iconfont">&#xe600;</i>
+                </a>
+                {/if}
+                <a style="text-decoration:none" onclick="goods_edit('修改商品','{:url('goods/edit',['id'=>$goods.id])}')" href="javascript:;">
+                    <i class="Hui-iconfont">&#xe6df;</i>
+                </a>
+            </td>
+        </tr>
+        {/volist}
+        </tbody>
+    </table>
+</div>
+</div>
+{include file='public/footer'}
