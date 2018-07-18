@@ -2,7 +2,7 @@
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 商户管理 <span class="c-gray en">&gt;</span> 商户列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
-    <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="r">共有数据：<strong></strong> 条</span> </div>
+    <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="r">共有数据：<strong></strong>{:count($data)} 条</span> </div>
     <div class="mt-20">
         <table class="table table-border table-bordered table-hover table-bg table-sort">
             <thead>
@@ -27,7 +27,7 @@
             <tr class="text-c">
                 <td><input type="checkbox" value="1" name=""></td>
                 <td>{$bis.id}</td>
-                <td><img src="/{$bis.person_img}" class="person_img" alt="此处应该有掌声"></td>
+                <td><img src="{$bis.person_img}" class="person_img" alt="此处应该有掌声"></td>
                 <td><u style="cursor:pointer" class="text-primary">{$bis.username}</u></td>
                 <td>{$bis.phone}</td>
                 <td>{$bis.email}</td>

@@ -1,9 +1,8 @@
 <?php
 namespace app\admin\controller;
 
-use app\common\controller\Base;
 
-class Index extends Base
+class Index extends AdminBase
 {
     public function index()
     {
@@ -13,5 +12,13 @@ class Index extends Base
     public function welcome()
     {
         return '欢迎来到后台管理系统';
+    }
+
+    //退出登录
+    public function logout()
+    {
+        //清空当前session
+        session('admin',null);
+        $this->redirect('login/index');
     }
 }

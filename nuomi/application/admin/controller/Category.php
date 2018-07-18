@@ -7,12 +7,11 @@
  */
 
 namespace app\admin\controller;
-
-use app\common\controller\Base;
 use think\App;
 
+
 //分类管理
-class Category extends Base {
+class Category extends AdminBase {
 
     public function __construct(App $app = null)
     {

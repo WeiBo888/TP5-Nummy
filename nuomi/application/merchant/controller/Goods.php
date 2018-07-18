@@ -11,6 +11,7 @@ namespace app\merchant\controller;
 
 use app\common\controller\Base;
 use think\App;
+use think\exception\PDOException;
 
 class Goods extends Base
 {
@@ -39,21 +40,29 @@ class Goods extends Base
                 'store' => $store
             ]);
         }else{
+            try {
 //            保存数据
-            $data = input();
+                $data = input();
 //            校验数据
-            $validate = validate('Goods');
-            $res = $validate->scene('add')->check($data);
-            if (!$res){
-                $this->error($validate->getError());
-            }else{
-                $data['bis_id'] = $this->userInfo['id'];
-                $res = $this->model_obj->save($data);
-                if ($res){
-                    $this->success('添加成功');
-                }else{
-                    $this->error('添加失败');
+                $validate = validate('Goods');
+                $res = $validate->scene('add')->check($data);
+                if (!$res) {
+                    $this->error($validate->getError());
+                } else {
+                    $data['bis_id'] = $this->userInfo['id'];
+                    $res = $this->model_obj->save($data);
+                    if ($res) {
+                        $this->success('添加成功');
+                    } else {
+                        $this->error('添加失败');
+                    }
                 }
+            }catch (PDOException $exception){
+                //删除图片
+                if (file_exists('.' . $data['image_url'])) {
+                    unlink('.' . $data['image_url']);
+                }
+                $this->error('添加失败');
             }
         }
 

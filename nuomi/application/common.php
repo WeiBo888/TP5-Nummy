@@ -72,3 +72,27 @@ function getCategoryNameByID($category_id){
     }
     return implode(',',$res);
 }
+
+//获取分页样式
+function pagination($data){
+    if (!$data || count($data) < 3){
+        return '';
+    }else{
+        $result = "<div class='cl pd-5 bg-1 bk-gray mt-20 tp5-nuomi'>".$data->render()."</div>";
+        return $result;
+    }
+}
+
+//根据商家id找商户名
+function getStoreNameByID($id){
+    $store = model('Store');
+    return $store->where(['id' => $id])->value('name');
+
+}
+
+//根据商家id找商户名
+function getBisNameByID($id){
+    $bis = model('Business');
+    return $bis->where(['id' => $id])->value('username');
+
+}

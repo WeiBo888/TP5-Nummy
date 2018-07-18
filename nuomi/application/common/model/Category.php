@@ -27,7 +27,7 @@ class Category extends Model{
         $con = [
             'parent_id' => $parent_id,
         ];
-        return $this->where($con)->select();
+        return $this->where($con)->paginate(3);
     }
 
     public function getCategoryByID($id)

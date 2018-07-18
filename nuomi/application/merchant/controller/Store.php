@@ -12,6 +12,7 @@ namespace app\merchant\controller;
 use app\common\controller\Base;
 use function PHPSTORM_META\type;
 use think\App;
+use think\exception\PDOException;
 
 class Store extends Base
 {
@@ -68,27 +69,38 @@ class Store extends Base
 
     public function save()
     {
-        $data = input();
-        $data['bis_id'] = $this->userInfo['id'];
-        unset($data['file']);
-        $validate = validate('Store');
-        $res = $validate->scene('add')->check($data);
+        try {
+            $data = input();
+            $data['bis_id'] = $this->userInfo['id'];
+            unset($data['file']);
+            $validate = validate('Store');
+            $res = $validate->scene('add')->check($data);
 
-        if (!$res){
-            $this->error($validate->getError());
-        }else{
-            $data['address']=$data['street'];
-            $data['category_id'] = implode(',',$data['category_id']);
-            $region = model('Region');
-            $map = \Map::getLgnLat($region->getRegionNameByID($data['province']).$region->getRegionNameByID($data['city']).'市'.$data['street']);
-            $data['longitude'] = $map['result']['location']['lng'];
-            $data['latitude'] = $map['result']['location']['lat'];
-            $res = $this->model_obj->save($data);
-            if (!$res){
-                $this->error('添加失败');
-            }else{
-                $this->success('添加成功');
+            if (!$res) {
+                $this->error($validate->getError());
+            } else {
+                $data['address'] = $data['street'];
+                $data['category_id'] = implode(',', $data['category_id']);
+                $region = model('Region');
+                $map = \Map::getLgnLat($region->getRegionNameByID($data['province']) . $region->getRegionNameByID($data['city']) . '市' . $data['street']);
+                $data['longitude'] = $map['result']['location']['lng'];
+                $data['latitude'] = $map['result']['location']['lat'];
+                $res = $this->model_obj->save($data);
+                if (!$res) {
+                    $this->error('添加失败');
+                } else {
+                    $this->success('添加成功');
+                }
             }
+        }catch (PDOException $e){
+            //删除图片
+            if (file_exists('.' . $data['store_img'])) {
+                unlink('.' . $data['store_img']);
+            }
+            if (file_exists('.' . $data['permits_img'])) {
+                unlink('.' . $data['permits_img']);
+            }
+            $this->error('注册失败');
         }
     }
 

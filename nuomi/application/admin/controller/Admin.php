@@ -7,10 +7,9 @@
  */
 namespace app\admin\controller;
 
-use app\common\controller\Base;
 use think\App;
 
-class Admin extends Base{
+class Admin extends AdminBase{
     public function __construct(App $app = null)
     {
         parent::__construct($app);
