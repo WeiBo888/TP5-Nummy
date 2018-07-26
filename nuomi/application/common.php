@@ -90,9 +90,17 @@ function getStoreNameByID($id){
 
 }
 
+
 //根据商家id找商户名
 function getBisNameByID($id){
     $bis = model('Business');
     return $bis->where(['id' => $id])->value('username');
 
 }
+
+//查找默认城市(status为3)
+function getDefaultCity(){
+    $city = model('Region');
+    return $city->where(['is_default'=>1])->value('name');
+}
+

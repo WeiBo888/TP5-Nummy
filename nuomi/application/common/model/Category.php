@@ -38,4 +38,19 @@ class Category extends Model{
 //        dump($id);
         return $this->where($con)->value('name');
     }
+
+    //获取所有一/二/三级分类(根据上一级级id)
+    public function getCategoryByParentID($parent_id = 0)
+    {
+        $con = [
+            'parent_id' => $parent_id,
+        ];
+        return $this->where($con)->select();
+    }
+
+    //通过一级分类查出三级分类
+    public function getCategoryByRootParentID($root_parent_id)
+    {
+        return $this->where("root_parent_id = $root_parent_id and root_parent_id != parent_id")->select();
+    }
 }

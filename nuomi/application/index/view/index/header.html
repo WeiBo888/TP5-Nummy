@@ -3,8 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Nummy</title>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/css/swiper.min.css">
     <link rel="stylesheet" href="/static/front/css/common.css">
 </head>
 <body>
@@ -14,7 +12,7 @@
     <div class="navigation">
         <!--导航栏左侧-->
         <!--未登录的状态-->
-        {if !$username}
+        {if !$userInfo}
         <ul class="left-navigation">
             <li>Hi，欢迎百度糯米</li>
             <li class="login"><a href="{:url('login/index')}">请登录</a></li>
@@ -23,7 +21,7 @@
         <!--已登录的状态-->
         {else /}
         <ul class="left-navigation">
-            <li>Hi, {$username}</li>
+            <li>Hi, {$userInfo}</li>
             <li class="register"><a href="{:url('login/logout')}">退出</a></li>
         </ul>
         {/if}
@@ -85,12 +83,12 @@
     <div class="top-area">
         <div class="search">
             <!--logo-->
-            <a href=""><img src="/static/front/images/re-logo_7c90a10.png" class="nuomi-logo"/></a>
+            <a href="{:url('index/index')}"><img src="/static/front/images/re-logo_7c90a10.png" class="nuomi-logo"/></a>
 
             <!--城市选择-->
             <div class="city-wrap">
                 <span><img src="/static/front/images/re-pos_50b4a85.png" class="city-pos"/></span>
-                <span>{$defaultCity.name}</span>
+                <span>{:getDefaultCity()}</span>
                 <span><img src="/static/front/images/line-arrow_698e86e.png" class="arrow-down-line"/></span>
                 <span class="option-arrow-down"></span>
                 <div class="hide-massage r4">
@@ -149,13 +147,6 @@
 
     <!--底部导航栏-->
     <div class="nav-bar-index">
-
-        <!--全部分类栏-->
-        <div class="item">
-            <span class="all">全部分类</span>
-            <img src="/static/front/images/item-img_c440d75.png" class="item-image"/>
-        </div>
-
         <!--横向分类排列-->
         <ul class="nav-list">
             <li class="nav-li"><a href="#" class="nav-a">首页</a></li>
@@ -181,13 +172,19 @@
         </ul>
     </div>
 
+
+    <!--全部分类栏-->
+    <div class="item menu-list-dis">
+        <span class="all">全部分类</span>
+        <img src="/static/front/images/item-img_c440d75.png" class="item-image"/>
+    </div>
     <!--纵向分类排列-->
     <ul class="menu-list">
 
         {volist name='manuData' id='first_level'}
         <li>
             <!--一级目录-->
-            <a href="#" class="menu-title">{$first_level.title}</a>
+            <a href="{:url('store/index',['first_level_id'=>$first_level.id,'price'=>0])}" class="menu-title">{$first_level.title}</a>
             <a href="#" class="menu-content">aaa</a>
             <div class="category-list" style="height: 400px!important; width: 730px!important;background-color: white;">
             {volist name='seManuData' id='second_level'}
@@ -203,7 +200,7 @@
                         {volist name='thManuData' id='third_level'}
                         <!--{if $second_level.id == $third_level.parent_id}-->
                         <li style="background-color: white">
-                            <a href="#">{$third_level.title}</a>
+                            <a href="{:url('store/index',['first_level_id'=>$first_level.id,'third_level_id'=>$third_level.id,'price'=>0])}">{$third_level.title}</a>
                         </li>
                         <!--{/if}-->
                         {/volist}
@@ -213,7 +210,7 @@
                         {volist name='thManuData' id='third_level'}
                         <!--{if $second_level.id == $third_level.parent_id}-->
                         <li style="background-color: white">
-                            <a href="#">{$third_level.title}</a>
+                            <a href="{:url('store/index',['first_level_id'=>$first_level.id,'third_level_id'=>$third_level.id,'price'=>0])}">{$third_level.title}</a>
                         </li>
                         <!--{/if}-->
                         {/volist}
@@ -227,6 +224,4 @@
         </li>
         {/volist}
     </ul>
-
-
 </div>

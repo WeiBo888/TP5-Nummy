@@ -1,0 +1,18 @@
+{include file='index/header'}
+{load href="/static/front/css/menu-hide.css"/}
+{load href="/static/front/css/order.css"}
+<div class="filter-breadcrumb">
+    <a href="{:url('index/index')}" class="filter-breadcrumb-link">团购</a><span class="filter-breadcrumb-link">></span><a
+        href="{:url('store/index',['first_level_id'=>$first_level_id,'third_level_id'=>$third_level_id,'price'=>0])}"
+        class="filter-breadcrumb-link">{$third_level_name}</a><span class="filter-breadcrumb-link">></span><span
+        style="color:#FF7BA8 " class="filter-breadcrumb-link">{$goods.name}</span>
+</div>
+<div class="middle-area">
+    <div class="store-msg">
+        <div class="goods-msg">
+            <img src="{$goods.image_url}" style="width: 470px;height: 285px">
+        </div>
+        <div></div>
+    </div>
+</div>
+{include file='index/footer'}

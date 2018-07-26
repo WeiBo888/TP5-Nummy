@@ -20,4 +20,12 @@ class Goods extends Model
         ];
         return $this->where($con)->select();
     }
+
+    public function getGoodsByStoreID($store_id)
+    {
+        $con = [
+          'store_id' => $store_id
+        ];
+        return $this->where($con)->select();
+    }
 }

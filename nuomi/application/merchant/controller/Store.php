@@ -43,7 +43,7 @@ class Store extends Base
         $region = model('Region');
         $provinces = $region->getAllProvinces();
         $category = model('Category');
-        $categories = $category->getChildLevelByParentID(0);
+        $categories = $category->where(['parent_id' => 0])->select();
         return view('',[
             'provinces' => $provinces,
             'categories' => $categories
@@ -63,7 +63,7 @@ class Store extends Base
     {
         $data = input('id');
         $category = model('Category');
-        $categories = $category->getChildLevelByParentID($data);
+        $categories = $category->where(['parent_id' => $data])->select();
         return json($categories);
     }
 

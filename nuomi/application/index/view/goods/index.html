@@ -1,0 +1,59 @@
+{include file='index/header'}
+{load href="/static/front/css/menu-hide.css"/}
+<!--当前目录-->
+<div class="filter-breadcrumb">
+    <a href="{:url('store/index',['first_level_id'=> $first_level_id,'price'=>0])}" class="filter-breadcrumb-link">{$first_level_name}</a><span class="filter-breadcrumb-link">></span><a
+        href="{:url('store/index',['first_level_id'=> $first_level_id,'third_level_id' => $third_level_category.id,'price'=>0])}" class="filter-breadcrumb-link">{$third_level_category.name}</a><span class="filter-breadcrumb-link">></span><a href="#" class="filter-breadcrumb-link">{$store.name}</a>
+</div>
+<div class="middle-area">
+    <div class="store-msg">
+        <div class="store-msg-list">
+            <h2>{$store.name}</h2>
+            <div class="store store-msg-comment">
+                <span class="store-msg-star"></span>
+                <span class="store-msg-star-score">(人评价)</span>
+                <span class="store-score"></span>丨
+                <span class="store-msg-avg">人均:&nbsp;¥{$store.avg_price}</span>
+            </div>
+            <div class="store store-msg-address">
+                <span>地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址:&nbsp;&nbsp;&nbsp;{$store.address}</span><span class="store-msg-map"></span><span class="store-msg-all-view"></span>
+            </div>
+            <div class="store store-msg-phone">
+                电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话:&nbsp;&nbsp;{$store.phone}
+            </div>
+            <div class="store store-msg-open-time">
+                营业时间:&nbsp;&nbsp;&nbsp;{$store.open_time}
+            </div>
+        </div>
+        <img src="{$store.store_img}" class="store-msg-img" style="width: 338px;height: 205px;")>
+    </div>
+    <div class="store-goods">
+        <h4 style="font-weight: 500;color: #666;">当前商家团购</h4>
+        <ul class="store-goods-list">
+            {volist name='goods' id='goods'}
+            <li class="store-goods-msg">
+                <a href="{:url('order/index',['goods_id'=>$goods.id,'first_level_id'=> $first_level_id,'third_level_id' => $third_level_category.id])}" style="display: inline-block"><img src="{$goods.image_url}" style="width: 143px;height: 89px"></a>
+                <div class="goods-msg">
+                    <a href="#" class="goods-msg-name">{$goods.name}</a>
+                    <div style="clear: both"></div>
+                    <div class="good-msg-desc">{$goods.good_desc}</div>
+                    <div class="good-sold">已售&nbsp;</div>
+                </div>
+                <div class="goods-msg-end">有效期:&nbsp;&nbsp;{$goods.end_time}</div>
+                <div class="goods-msg-price">
+                    <div class="goods-msg-new-price"><span style="font-size: 16px">¥&nbsp;</span>{$goods.new_price}</div>
+                    <div class="goods-msg-old-price"><span>门市价</span><span style="text-decoration: line-through">¥{$goods.old_price}</span></div>
+                </div>
+                <a href="#" class="buy-now">立即购买</a>
+            </li>
+            {/volist}
+        </ul>
+    </div>
+    <div class="right-aside">
+        <div class="baidu-map">
+
+        </div>
+    </div>
+    <div style="clear: both"></div>
+</div>
+{include file='index/footer'}
